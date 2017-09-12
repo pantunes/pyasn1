@@ -24,7 +24,6 @@ class BooleanEncoder(encoder.IntegerEncoder):
 
 class BitStringEncoder(encoder.BitStringEncoder):
     def encodeValue(self, value, encodeFun, **options):
-        options.update(maxChunkSize=1000)
         return encoder.BitStringEncoder.encodeValue(
             self, value, encodeFun, **options
         )
@@ -32,7 +31,6 @@ class BitStringEncoder(encoder.BitStringEncoder):
 
 class OctetStringEncoder(encoder.OctetStringEncoder):
     def encodeValue(self, value, encodeFun, **options):
-        options.update(maxChunkSize=1000)
         return encoder.OctetStringEncoder.encodeValue(
             self, value, encodeFun, **options
         )
@@ -75,8 +73,6 @@ class TimeEncoderMixIn(object):
 
         if self.commachar in octets:
             raise error.PyAsn1Error('Comma in fractions disallowed: %r' % value)
-
-        options.update(maxChunkSize=1000)
 
         return encoder.OctetStringEncoder.encodeValue(
             self, value, encodeFun, **options
